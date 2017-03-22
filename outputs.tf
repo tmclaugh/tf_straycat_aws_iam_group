@@ -7,3 +7,7 @@ output "aws_iam_group_name" {
   value = "${aws_iam_group.group.name}"
 }
 
+output "aws_iam_groupmembership_users" {
+  value = "${aws_iam_group_membership.group.users}"
+}
+
