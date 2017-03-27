@@ -9,9 +9,9 @@ resource "aws_iam_group" "group" {
 # understand what it has access to, and then see who has that access.
 resource "aws_iam_group_membership" "group" {
   count = "${length(var.aws_iam_group_members) == 0 ? 0 : 1}"
-  name  = "${var.aws_iam_group_name}-membership"
+  name  = "${aws_iam_group.group.name}-membership"
   users = "${var.aws_iam_group_members}"
-  group = "${var.aws_iam_group_name}"
+  group = "${aws_iam_group.group.name}"
 }
 
 # FIXME: Does not work because we can't pass a list of maps at this time.
