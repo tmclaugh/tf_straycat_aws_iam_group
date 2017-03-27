@@ -15,10 +15,10 @@ resource "aws_iam_group_membership" "group" {
 }
 
 # FIXME: Does not work because we can't pass a list of maps at this time.
-#resource "aws_iam_group_policy" "group" {
-#  count = "${length(var.aws_iam_group_policy)}"
-#
-#  name = "${keys(var.aws_iam_group_policy[count.index])[0]}"
-#  group = "${aws_iam_group.group.name}"
-#  policy = "${values(var.aws_iam_group_policy[count.index])[0]}"
-#}
+resource "aws_iam_group_policy" "group" {
+  count = "${length(var.aws_iam_group_policy)}"
+  name = "${element(keys(var.aws_iam_group_policy), count.index)}"
+  group = "${aws_iam_group.group.name}"
+  policy = "${element(values(var.aws_iam_group_policy), count.index)}"
+}
+

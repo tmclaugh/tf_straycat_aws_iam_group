@@ -17,8 +17,8 @@ variable "aws_iam_group_members" {
   default = []
 }
 
-#variable "aws_iam_group_policy" {
-#  type = "list"
-#  description = "List of AWS IAM policy definitions in name=policy format"
-#  default = []
-#}
+variable "aws_iam_group_policy" {
+  type = "map"
+  description = "List of AWS IAM policy definitions in name=policy format"
+  default = {}
+}
