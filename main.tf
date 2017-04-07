@@ -14,7 +14,6 @@ resource "aws_iam_group_membership" "group" {
   group = "${aws_iam_group.group.name}"
 }
 
-# FIXME: Does not work because we can't pass a list of maps at this time.
 resource "aws_iam_group_policy" "group" {
   count = "${length(var.aws_iam_group_policy)}"
   name = "${element(keys(var.aws_iam_group_policy), count.index)}"
