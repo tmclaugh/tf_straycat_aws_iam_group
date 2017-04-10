@@ -14,10 +14,22 @@ resource "aws_iam_group_membership" "group" {
   group = "${aws_iam_group.group.name}"
 }
 
+# inline policies
 resource "aws_iam_group_policy" "group" {
   count = "${length(var.aws_iam_group_policy)}"
   name = "${element(keys(var.aws_iam_group_policy), count.index)}"
   group = "${aws_iam_group.group.name}"
   policy = "${element(values(var.aws_iam_group_policy), count.index)}"
 }
+
+
+# AWS Managed policies
+resource "aws_iam_policy_attachment" "group" {
+  count = "${length(var.aws_iam_group_aws_managed_policy_arns)}"
+  #name = "${element(split(",", element(var.aws_iam_group_aws_managed_policy_arns, count.index)), -1)}"
+  name = "${element(var.aws_iam_group_aws_managed_policy_arns, count.index)}"
+  groups = ["${aws_iam_group.group.name}"]
+  policy_arn = "${element(var.aws_iam_group_aws_managed_policy_arns, count.index)}"
+}
+
 

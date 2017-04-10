@@ -22,3 +22,10 @@ variable "aws_iam_group_policy" {
   description = "List of AWS IAM policy definitions in name=policy format"
   default = {}
 }
+
+variable "aws_iam_group_aws_managed_policy_arns" {
+  type = "list"
+  description = "List of AWS IAM managed policy names. (use with customer owned policies)"
+  default = []
+}
+
